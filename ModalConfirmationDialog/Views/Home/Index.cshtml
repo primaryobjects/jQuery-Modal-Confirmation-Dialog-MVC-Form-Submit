@@ -1,0 +1,74 @@
+﻿@using ModalConfirmationDialog.Managers
+
+@model ModalConfirmationDialog.Models.Contact
+
+@{
+    ViewBag.Title = "Contact Form";
+}
+
+<h2>Contact Form</h2>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "contactForm", name = "contactForm" }))
+{
+    @Html.ValidationSummary()
+
+    <h1>Contact Information</h1>
+
+    <div id="contactInformation" style="padding: 0 0 0 15px;">
+        <div>
+            <div style="float: left; width: 110px;">
+                @Html.LabelFor(e => e.Name, "Name")
+            </div>
+            <div style="float: left;">
+                @Html.TextBoxFor(e => e.Name)
+                @Html.ValidationMessageFor(e => e.Name)
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+        <div>
+            <div style="float: left; width: 110px;">
+                @Html.LabelFor(e => e.Email, "Email")
+            </div>
+            <div style="float: left;">
+                @Html.TextBoxFor(e => e.Email)
+                @Html.ValidationMessageFor(e => e.Email)
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+        <div>
+            <div style="float: left; width: 110px;">
+                @Html.LabelFor(e => e.Color_ID, "Favorite Color")
+            </div>
+            <div style="float: left;">
+                @Html.DropDownListFor(e => e.Color_ID, ColorManager.GetColorList())
+                @Html.ValidationMessageFor(e => e.Color_ID)
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+    
+    <div id="submitControls" style="padding:  25px 0 0 15px;">
+        <div>
+            <div style="float: left; width: 110px;">
+                &nbsp;
+            </div>
+            <div style="float: left;">
+                <input type="submit" title="Register" value="Register" id="btnRegister" />
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>    
+}
+
+<div id="confirmDialog" title="Confirm Details">
+    <p>Please confirm your details.</p>
+    <div>
+        Name: <span id="confirmName" />
+    </div>
+    <div>
+        Email: <span id="confirmEmail" />
+    </div>
+    <div>
+        Favorite Color: <span id="confirmColor" />
+    </div>
+</div>
